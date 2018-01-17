@@ -1,0 +1,32 @@
+﻿
+<!-- Paging -->
+<div class="row">
+    <div class="col-md-12 pagination">
+        @{
+            if (Model.Pages >= 2)
+            {
+                if (ViewBag.CurrentPage != 1)
+                {
+                <button class="btn btn-primary" data-item="1">First</button>
+                }
+
+                for (int i = ViewBag.CurrentPage - 3; i <= ViewBag.CurrentPage + 3; i++)
+                {
+                    if (i == ViewBag.CurrentPage && i >= 1 && ViewBag.CurrentPage <= Model.Pages)
+                    {
+                    <button class="btn btn-primary" data-item="@i">@i</button>
+                    }
+                    else if (i >= 1 && i <= Model.Pages)
+                    {
+                    <button class="btn btn-default" data-item="@i">@i</button>
+                    }
+                }
+
+                if (ViewBag.CurrentPage != Model.Pages)
+                {
+                <button class="btn btn-primary" data-item="@Model.Pages">Last</button>
+                    }
+                }
+            }
+    </div>
+</div>

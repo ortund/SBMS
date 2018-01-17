@@ -1,0 +1,131 @@
+﻿@model SMBMAdmin.Models.StoreViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-4">
+        <h2>Register your Store</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.PackageId, "Package", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.PackageId, Model.Packages, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Telephone, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.EmailAddress, "Email Address", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ContactPerson, "Contact Person", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.ContactPerson, new { @class = "form-control" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ContactNumber, "Contact Number", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.ContactNumber, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Terminals, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Terminals, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Commission, "Commission (%)", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Commission, new { @class = "form-control" })
+                </div>
+            </div>
+        }
+
+        <button class="btn btn-primary add_store">Create</button>
+        <button class="btn btn-default cancel_store">Cancel</button>
+    </div>
+</div>
+
+<script>
+    $(".add_store").on("click", function () {
+        SaveStore();
+    });
+
+    $(".cancel_store").on("click", function () {
+        location.href = "/Store";
+    });
+
+    function SaveStore() {
+        var name = $("#Name").val();
+        var packageId = $("#PackageId").val();
+        var address = $("#Address").val();
+        var telephone = $("#Telephone").val();
+        var emailAddress = $("#EmailAddress").val();
+        var contactPerson = $("#ContactPerson").val();
+        var contactNumber = $("#ContactNumber").val();
+        var terminals = $("#Terminals").val();
+        var commission = $("#Commission").val();
+
+        var store = {
+            "Name": name,
+            "PackageId": packageId,
+            "Address": address,
+            "Telephone": telephone,
+            "EmailAddress": emailAddress,
+            "ContactPerson": contactPerson,
+            "ContactNumber": contactNumber,
+            "Terminals": terminals,
+            "Commission": commission
+        };
+
+        $.post("/Store/Register", store, function (data) {
+            if (data.IsOkay)
+            {
+                location = "/Store/Confirmation";
+            }
+            else
+            {
+                alert("An error occurred:\r\n" + data.Error);
+            }
+        }, "json");
+    }
+</script>
