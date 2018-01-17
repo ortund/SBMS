@@ -36,7 +36,7 @@ namespace SBMSAdmin.Controllers
                         EmailAddress  = store.EmailAddress,
                         Id            = store.Id,
                         Name          = store.Name,
-                        Package       = new PackageViewModel
+                        Package       = new SBMSData.ViewModels.PackageViewModel
                         {
                             Deleted = store.Package.Deleted,
                             Id      = store.Package.Id,
@@ -47,7 +47,7 @@ namespace SBMSAdmin.Controllers
                         Terminals = store.Terminals
                     });
                 }
-                model.Pages = stores.Count / 20;
+                model.Pages       = stores.Count / 20;
                 model.CurrentPage = page;
             }
             return View(model);
@@ -61,7 +61,7 @@ namespace SBMSAdmin.Controllers
                 new SelectListItem
                 {
                     Value = x.Id.ToString(),
-                    Text = x.Name
+                    Text  = x.Name
                 });
 
                 return new SelectList(packages, "Value", "Text");
