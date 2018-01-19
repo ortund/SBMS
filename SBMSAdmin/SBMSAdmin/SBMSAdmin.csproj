@@ -49,8 +49,8 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="SMBSData">
-      <HintPath>..\..\SMBSData\SMBSData\bin\Release\SMBSData.dll</HintPath>
+    <Reference Include="SBMSData">
+      <HintPath>..\..\SMBSData\SMBSData\bin\Release\SBMSData.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -192,6 +192,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FeatureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PackageController.cs" />
@@ -277,6 +278,11 @@
     <Content Include="Views\Store\Edit.cshtml" />
     <Content Include="Views\Store\Index.cshtml" />
     <Content Include="Views\Store\Register.cshtml" />
+    <Content Include="Views\Package\Create.cshtml" />
+    <Content Include="Views\Package\Edit.cshtml" />
+    <Content Include="Views\Feature\Index.cshtml" />
+    <Content Include="Views\Feature\Create.cshtml" />
+    <Content Include="Views\Feature\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

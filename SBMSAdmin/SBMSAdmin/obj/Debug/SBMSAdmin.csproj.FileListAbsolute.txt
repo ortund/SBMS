@@ -54,7 +54,6 @@ C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bi
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\Newtonsoft.Json.dll
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\Owin.dll
-C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\SMBSData.dll
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\System.Web.Helpers.dll
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\System.Web.Mvc.dll
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\System.Web.Optimization.dll
@@ -64,8 +63,6 @@ C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bi
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\System.Web.WebPages.Razor.dll
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\WebGrease.dll
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\SMBSData.pdb
-C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\SMBSData.dll.config
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\System.Web.Helpers.xml
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\System.Web.Mvc.xml
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\System.Web.Optimization.xml
@@ -99,3 +96,6 @@ C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\ob
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\obj\Debug\SBMSAdmin.pdb
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\obj\Debug\SBMSAdmin.Migrations.AdminInitial.resources
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\obj\Debug\SBMSAdmin.csproj.GenerateResource.Cache
+C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\SBMSData.dll
+C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\SBMSData.pdb
+C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\SBMSData.dll.config

@@ -13,14 +13,21 @@ namespace SBMSAdmin.Controllers
     {
         public ActionResult Index()
         {
-            // Determine if the user has access to view this content.
-            // If yes, continue, else redirect to login.
-            var usermanager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-            var isGlobal = usermanager.IsInRole(HttpContext.User.Identity.GetUserId(), "global");
-
-            if (isGlobal)
+            if (HttpContext.User.Identity.IsAuthenticated)
             {
-                return View();
+                // Determine if the user has access to view this content.
+                // If yes, continue, else redirect to login.
+                var usermanager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var isGlobal = usermanager.IsInRole(HttpContext.User.Identity.GetUserId(), "global");
+
+                if (isGlobal)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Account");
+                }
             }
             else
             {

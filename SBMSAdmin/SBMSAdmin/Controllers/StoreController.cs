@@ -124,7 +124,7 @@ namespace SBMSAdmin.Controllers
             var model = new Models.StoreViewModel();
             using (var db = new ApplicationDbContext())
             {
-                var store           = db.Stores.Include(i => i.Package).Single(x => x.Id == id && !x.Deleted);
+                var store           = db.Stores.Include(i => i.Package).Single(x => x.Id == id);
                 model.Address       = store.Address;
                 model.Commission    = store.Commission;
                 model.ContactNumber = store.ContactNumber;
@@ -171,8 +171,7 @@ namespace SBMSAdmin.Controllers
                 return Json(new { IsOkay = false, Error = ex.Message, Stack = ex.StackTrace }, JsonRequestBehavior.AllowGet);
             }
         }
-
-        [HttpPost]
+        
         public JsonResult Delete(int id)
         {
             try

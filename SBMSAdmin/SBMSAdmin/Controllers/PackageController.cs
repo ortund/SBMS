@@ -102,11 +102,98 @@ namespace SBMSAdmin.Controllers
 
                     return Json(new { Id = package.Id, IsOkay = true }, JsonRequestBehavior.AllowGet);
                 }
-
+            }
+            catch (Exception ex)
+            {
+                return Json(new { IsOkay = false, Error = ex.Message, Stack = ex.StackTrace }, JsonRequestBehavior.AllowGet);
             }
         }
 
+        // GET: Package/Edit
+        public ActionResult Edit(int id)
+        {
+            var model = new Models.PackageViewModel()
+            {
+                Features = GetFeatures()
+            };
+            using (var db = new ApplicationDbContext())
+            {
+                var package         = db.Packages.Single(x => x.Id == id);
+                var packageFeatures = db.PackageFeatures.Where(x => x.Package == package && !x.Deleted);
+                foreach (var packageFeature in packageFeatures)
+                {
+                    model.SelectedFeatures.Add(packageFeature.Id);
+                }
+
+                model.Id    = package.Id;
+                model.Name  = package.Name;
+                model.Price = package.Price;
+            }
+
+            return View(model);
+        }
+
+        // POST: Package/Edit/{id}
         [HttpPost]
-        public 
+        public JsonResult Edit(Models.PackageViewModel model)
+        {
+            try
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    var package = db.Packages.Single(x => x.Id == model.Id);
+
+                    package.Name = model.Name;
+                    package.Price = model.Price;
+
+                    // Remove all package feature links (resetting package features).
+                    // These records are physically deleted from the database to avoid bloat
+                    // in the database that would occur if they were kept.
+                    db.PackageFeatures.RemoveRange(db.PackageFeatures.Where(x => x.Package == package));
+
+                    // Add newly selected package feature links.
+                    foreach (var feature in model.Features)
+                    {
+                        if (feature.Selected)
+                        {
+                            int selectedFeatureId = int.TryParse(feature.Value, out selectedFeatureId) ? selectedFeatureId : 0;
+
+                            db.PackageFeatures.Add(new PackageFeatures
+                            {
+                                Feature = db.Features.Single(x => x.Id == selectedFeatureId),
+                                Package = package,
+                                Deleted = false
+                            });
+                        }
+                    }
+
+                    db.SaveChanges();
+                }
+
+                return Json(new { IsOkay = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { IsOkay = false, Error = ex.Message, Stack = ex.StackTrace }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        
+        public JsonResult Delete(int id)
+        {
+            try
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    db.Packages.Single(x => x.Id == id).Deleted = true;
+                    db.SaveChanges();
+                }
+
+                return Json(new { IsOkay = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { IsOkay = false, Error = ex.Message, Stack = ex.StackTrace }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

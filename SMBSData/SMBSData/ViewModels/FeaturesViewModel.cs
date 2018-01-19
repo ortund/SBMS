@@ -8,7 +8,7 @@ namespace SBMSData.ViewModels
 {
     public class FeaturesViewModel
     {
-        public List<FeatureViewModel> Feature { get; set; }
+        public List<FeatureViewModel> Features { get; set; }
         public int Pages { get; set; }
         public int CurrentPage { get; set; }
     }

@@ -1,0 +1,62 @@
+﻿@model SBMSData.ViewModels.FeatureViewModel
+@{
+    ViewBag.Title = "Editing a Feature";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Editing a Feature</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label " })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                </div>
+            </div>
+            @Html.HiddenFor(m => m.Id)
+        }
+
+        <button class="btn btn-primary save">Save</button>
+        <button class="btn btn-default cancel">Cancel</button>
+    </div>
+</div>
+
+<script>
+    $(".save").on("click", function () {
+        Save();
+    });
+
+    $(".cancel").on("click", function () {
+        location.href = "/Feature";
+    });
+
+    function Save() {
+        var id = $("#Id").val();
+        var description = $("#Description").val();
+
+        var feature = {
+            "Id": id,
+            "Description": description
+        };
+
+        $.post("/Feature/Edit", feature, function (data) {
+            if (data.IsOkay) {
+                alert("Feature successfully updated.");
+                location = "/Feature";
+            }
+            else {
+                alert("An error occurred:\r\n" + data.Error);
+            }
+        }, "json");
+    }
+</script>

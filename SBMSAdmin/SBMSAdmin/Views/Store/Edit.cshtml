@@ -1,4 +1,4 @@
-﻿@model SMBMAdmin.Models.StoreViewModel
+﻿@model SBMSAdmin.Models.StoreViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -79,23 +79,26 @@
                     @Html.TextBoxFor(m => m.Commission, new { @class = "form-control" })
                 </div>
             </div>
+
+            @Html.HiddenFor(m => m.Id)
         }
 
-        <button class="btn btn-primary add_store">Create</button>
-        <button class="btn btn-default cancel_store">Cancel</button>
+        <button class="btn btn-primary save">Create</button>
+        <button class="btn btn-default cancel">Cancel</button>
     </div>
 </div>
 
 <script>
-    $(".add_store").on("click", function () {
-        SaveStore();
+    $(".save").on("click", function () {
+        Save();
     });
 
-    $(".cancel_store").on("click", function () {
+    $(".cancel").on("click", function () {
         location.href = "/Store";
     });
 
-    function SaveStore() {
+    function Save() {
+        var id = $("#Id").val();
         var name = $("#Name").val();
         var packageId = $("#PackageId").val();
         var address = $("#Address").val();
@@ -107,6 +110,7 @@
         var commission = $("#Commission").val();
 
         var store = {
+            "Id": id,
             "Name": name,
             "PackageId": packageId,
             "Address": address,
@@ -118,10 +122,10 @@
             "Commission": commission
         };
 
-        $.post("/Store/Create", store, function (data) {
+        $.post("/Store/Edit", store, function (data) {
             if (data.IsOkay)
             {
-                alert("Store successfully created.");
+                alert("Store successfully updated.");
                 location = "/Store";
             }
             else
