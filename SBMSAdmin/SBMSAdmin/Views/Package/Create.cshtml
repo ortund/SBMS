@@ -11,42 +11,48 @@
 
 <div class="row">
     <div class="col-md-12">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Price, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Features, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @foreach (var item in Model.Features)
+                        {
+                            <div class="col-md-4 checkbox">
+                                <label>
+                                    <input type="checkbox" name="SelectedFeatures" class="feature" value="@item.Value" /> @item.Text
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                <div class="col-md-offset-2 col-md-10">
+                    <button class="btn btn-primary save">Create</button>
+                    <button class="btn btn-default cancel">Cancel</button>
                 </div>
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.Price, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <h3>@Html.LabelFor(m => m.Features, new {@class = "col-md-2 control-label"}</h3>
-                <div class="col-md-12">
-                    @foreach (var item in Model.Features)
-                    {
-                        <div class="col-md-4 checkbox">
-                            <label>
-                                <input type="checkbox" name="SelectedFeatures" value="@item.Value" /> @item.Text
-                            </label>
-                        </div>
-                    }
-                </div>
-            </div>
-        }
-
-        <button class="btn btn-primary save">Create</button>
-        <button class="btn btn-default cancel">Cancel</button>
+        </div>
     </div>
 </div>
 
@@ -63,17 +69,16 @@
         var name = $("#Name").val();
         var price = $("#Price").val();
         var features = $("#Features").val();
-        var selectedFeatures = $("#SelectedFeatures").val();
 
         var package = {
             "Name": name,
             "Price": price,
             "Features": features,
-            "SelectedFeatures": selectedFeatures
+            "SelectedFeatures": $('input.feature:checked').map((i, x) => x.value).toArray()
         };
 
         $.post("/Package/Create", package, function (data) {
-            if (data.data.IsOkay) {
+            if (data.IsOkay) {
                 alert("Package successfully created.");
                 location = "/Package";
             }

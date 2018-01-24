@@ -152,6 +152,7 @@ namespace SBMSAdmin.Controllers
                 {
                     var store = db.Stores.Single(x => x.Id == model.Id);
 
+                    store.Name          = model.Name;
                     store.Address       = model.Address;
                     store.Commission    = model.Commission;
                     store.ContactNumber = model.ContactNumber;

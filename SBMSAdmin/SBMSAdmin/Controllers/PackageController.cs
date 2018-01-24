@@ -83,19 +83,18 @@ namespace SBMSAdmin.Controllers
                     db.SaveChanges();
 
                     // Add features that were selected to the package.
-                    foreach (var feature in model.Features)
-                    {
-                        if (feature.Selected)
-                        {
-                            int selectedFeatureId = int.TryParse(feature.Value, out selectedFeatureId) ? selectedFeatureId : 0;
 
-                            db.PackageFeatures.Add(new PackageFeatures
-                            {
-                                Feature = db.Features.Single(x => x.Id == selectedFeatureId),
-                                Package = package,
-                                Deleted = false
-                            });
-                        }
+                    // model.Features is returning null from the View.
+                    if (model.Features == null) model.Features = GetFeatures();
+                    
+                    foreach (var id in model.SelectedFeatures)
+                    {
+                        db.PackageFeatures.Add(new PackageFeatures
+                        {
+                            Feature = db.Features.Single(x => x.Id == id),
+                            Package = package,
+                            Deleted = false
+                        });
                     }
 
                     db.SaveChanges();
@@ -119,15 +118,12 @@ namespace SBMSAdmin.Controllers
             using (var db = new ApplicationDbContext())
             {
                 var package         = db.Packages.Single(x => x.Id == id);
-                var packageFeatures = db.PackageFeatures.Where(x => x.Package == package && !x.Deleted);
-                foreach (var packageFeature in packageFeatures)
-                {
-                    model.SelectedFeatures.Add(packageFeature.Id);
-                }
+                var packageFeatures = db.PackageFeatures.Where(x => x.Package.Id == package.Id && !x.Deleted).Select(x =>x.Feature.Id).ToArray();
 
-                model.Id    = package.Id;
-                model.Name  = package.Name;
-                model.Price = package.Price;
+                model.Id               = package.Id;
+                model.Name             = package.Name;
+                model.Price            = package.Price;
+                model.SelectedFeatures = packageFeatures;
             }
 
             return View(model);
@@ -149,22 +145,18 @@ namespace SBMSAdmin.Controllers
                     // Remove all package feature links (resetting package features).
                     // These records are physically deleted from the database to avoid bloat
                     // in the database that would occur if they were kept.
-                    db.PackageFeatures.RemoveRange(db.PackageFeatures.Where(x => x.Package == package));
+                    db.PackageFeatures.RemoveRange(db.PackageFeatures.Where(x => x.Package.Id == package.Id));
 
+                    if (model.Features == null) model.Features = GetFeatures();
                     // Add newly selected package feature links.
-                    foreach (var feature in model.Features)
+                    foreach (var id in model.SelectedFeatures)
                     {
-                        if (feature.Selected)
+                        db.PackageFeatures.Add(new PackageFeatures
                         {
-                            int selectedFeatureId = int.TryParse(feature.Value, out selectedFeatureId) ? selectedFeatureId : 0;
-
-                            db.PackageFeatures.Add(new PackageFeatures
-                            {
-                                Feature = db.Features.Single(x => x.Id == selectedFeatureId),
-                                Package = package,
-                                Deleted = false
-                            });
-                        }
+                            Feature = db.Features.Single(x => x.Id == id),
+                            Package = package,
+                            Deleted = false
+                        });
                     }
 
                     db.SaveChanges();

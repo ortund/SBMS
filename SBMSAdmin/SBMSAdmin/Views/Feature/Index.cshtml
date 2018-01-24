@@ -50,7 +50,8 @@
 </div>
 
 <script>
-    $("a").on("click", function () {
-
+    $(".pagination button").on("click", function () {
+        var pageNumber = $(this).attr("data-item");
+        location.href = "/Feature/?page=" + pageNumber;
     });
 </script>

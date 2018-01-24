@@ -10,78 +10,80 @@
 
 <div class="row">
     <div class="col-md-12">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @class = "text-danger" })
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.PackageId, "Package", new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.PackageId, Model.Packages, new { @class = "form-control" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PackageId, "Package", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.PackageId, Model.Packages, new { @class = "form-control" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.Telephone, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Telephone, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.EmailAddress, "Email Address", new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.EmailAddress, "Email Address", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.ContactPerson, "Contact Person", new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.ContactPerson, new { @class = "form-control" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ContactPerson, "Contact Person", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.ContactPerson, new { @class = "form-control" })
+                    </div>
                 </div>
-            </div>
 
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.ContactNumber, "Contact Number", new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.ContactNumber, new { @class = "form-control" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ContactNumber, "Contact Number", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.ContactNumber, new { @class = "form-control" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.Terminals, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Terminals, new { @class = "form-control" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Terminals, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Terminals, new { @class = "form-control" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.Commission, "Commission (%)", new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Commission, new { @class = "form-control" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Commission, "Commission (%)", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Commission, new { @class = "form-control" })
+                    </div>
                 </div>
-            </div>
-        }
+            }
 
-        <button class="btn btn-primary save">Create</button>
-        <button class="btn btn-default cancel">Cancel</button>
+            <button class="btn btn-primary save">Create</button>
+            <button class="btn btn-default cancel">Cancel</button>
+        </div>
     </div>
 </div>
 

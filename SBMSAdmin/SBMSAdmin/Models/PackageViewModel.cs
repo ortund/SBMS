@@ -9,6 +9,6 @@ namespace SBMSAdmin.Models
     public class PackageViewModel : SBMSData.ViewModels.PackageViewModel
     {
         public IEnumerable<SelectListItem> Features { get; set; }
-        public List<int> SelectedFeatures { get; set; }
+        public int[] SelectedFeatures { get; set; }
     }
 }
