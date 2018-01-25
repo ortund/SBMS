@@ -1,0 +1,91 @@
+﻿@model SBMSAdmin.Models.InvoiceViewModel
+@{
+    @ViewBag.Title = "Adding an Invoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row"
+    <div class="col-md-4">
+        <h2>@ViewBag.Title</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-horizontal">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.StoreId, "Store", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.StoreId, Model.Stores, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Amount, new {  @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Date, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => Model.Date, new { @class = "form-control datepicker" })
+                    </div>
+                </div>
+            }
+
+            <button class="btn btn-primary save">Create</button>
+            <button class="btn btn-default cancel">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.datepicker').datepicker();
+    });
+
+    $("#StoreId").on("change", function () {
+        var storeId = $(this).val();
+        $.post("/Invoice/GetStorePackage", storeId, function (data) {
+            $("#Amount").val(data.Amount);
+        });
+    });
+
+    $(".cancel").on("click", function () {
+        location.href = "/Invoice";
+    });
+
+    $(".save").on("click", function () {
+        Save();
+    });
+
+    function Save() {
+        var storeId = $("#StoreId").val();
+        var amount = $("#Amount").val();
+        var date = $("#Date").val();
+
+        var invoice = {
+            "StoreId": storeId,
+            "Amount": amount,
+            "Date": date
+        };
+
+        $.pos("/Invoice/Create", invoice, function (data) {
+            if (data.IsOkay)
+            {
+                alert("Invoice successfully create.");
+                location.href = "/Invoice/"
+            }
+            else
+            {
+                alert("An error occurred:\r\n" + data.Error);
+            }
+        });
+    }
+</script>

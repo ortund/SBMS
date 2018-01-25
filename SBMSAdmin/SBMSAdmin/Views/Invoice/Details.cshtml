@@ -1,0 +1,37 @@
+﻿@model SBMSAdmin.Models.InvoiceViewModel
+@{
+    @ViewBag.Title = $"Invoice {Model.Number}";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div>
+        <p>
+            @Model.Store.Name<br />
+            Invoice <b>@Model.Number</b><br />
+            @Model.Date<br />
+            R @Model.Amount
+        </p>
+
+        @if (Model.Paid)
+        {
+            <p class="text-success">
+                Invoice has been paid.
+            </p>
+        }
+        else
+        {
+            <p class="text-danger">
+                Unpaid invoice.
+            </p>
+        }
+    </div>
+</body>
+</html>
