@@ -99,3 +99,4 @@ C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\ob
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\SBMSData.dll
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\SBMSData.pdb
 C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\bin\SBMSData.dll.config
+C:\Users\logan\Documents\Visual Studio 2017\Projects\SBMS\SBMSAdmin\SBMSAdmin\obj\Debug\SBMSAdmin.Migrations.UpdatedInvoicesModel.resources

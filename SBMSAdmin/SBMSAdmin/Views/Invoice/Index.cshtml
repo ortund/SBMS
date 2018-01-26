@@ -23,12 +23,10 @@
                     <tr>
                         <th scope="col"></th>
                         <th scope="col"></th>
-                        <th scope="col"></th>
                         <th scope="col">Store</th>
                         <th scope="col">Invoice Number</th>
                         <th scope="col">Invoice Amount</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Paid</th>
+                        <th scope="col">Invoice Date</th>
                         <th scope="col">Paid On</th>
                     </tr>
                 </thead>
@@ -45,9 +43,17 @@
                             <td>@invoice.Store.Name</td>
                             <td>@invoice.Number</td>
                             <td>R @invoice.Amount</td>
-                            <td>@invoice.Date</td>
-                            <td>@invoice.Paid</td>
-                            <td>@invoice.DatePaid</td>
+                            <td>@invoice.Date.ToString("yyyy/MM/dd")</td>
+                            <td>
+                            @if (invoice.DatePaid != null)
+                            {
+                                @Convert.ToDateTime(invoice.DatePaid).ToString("yyyy/MM/dd")
+                            }
+                            else
+                            {
+                                <span>-</span>
+                            }
+                            </td>
                         </tr>
                     }
                 </tbody>

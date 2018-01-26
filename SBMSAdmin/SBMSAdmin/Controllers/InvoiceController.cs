@@ -78,12 +78,14 @@ namespace SBMSAdmin.Controllers
                     db.SaveChanges();
 
                     // Generate an invoice number.
-                    var sname = model.Store.Name.Substring(0, 3);
+                    var sname = invoice.Store.Name.Substring(0, 3);
                     var invnum = string.Format("{0:D8}", invoice.Id);
 
                     var invoiceNumber = $"{sname}{invnum}";
 
                     invoice.Number = invoiceNumber;
+
+                    db.SaveChanges();
                 }
                 return Json(new { IsOkay = true }, JsonRequestBehavior.AllowGet);
             }

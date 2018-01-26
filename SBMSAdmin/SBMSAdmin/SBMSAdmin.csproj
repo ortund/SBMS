@@ -206,6 +206,10 @@
     <Compile Include="Migrations\201801171149285_AdminInitial.Designer.cs">
       <DependentUpon>201801171149285_AdminInitial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801261024392_UpdatedInvoicesModel.cs" />
+    <Compile Include="Migrations\201801261024392_UpdatedInvoicesModel.Designer.cs">
+      <DependentUpon>201801261024392_UpdatedInvoicesModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -312,6 +316,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801171149285_AdminInitial.resx">
       <DependentUpon>201801171149285_AdminInitial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801261024392_UpdatedInvoicesModel.resx">
+      <DependentUpon>201801261024392_UpdatedInvoicesModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
